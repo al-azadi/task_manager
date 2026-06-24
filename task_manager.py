@@ -142,7 +142,7 @@ def rebuild_ui():
     
     
     head = ctk.CTkFrame(app, fg_color="transparent"); head.pack(fill="x", padx=20, pady=15)
-    ctk.CTkLabel(head, text="🚀 TaskFlow", font=("Arial",28,"bold"), text_color=C["accent"]).pack(side="left")
+    ctk.CTkLabel(head, text="🚀 TO-DO LIST", font=("Arial",28,"bold"), text_color=C["del"]).pack(side="left")
     
     
     theme_frame = ctk.CTkFrame(head, fg_color="transparent"); theme_frame.pack(side="right")
@@ -206,7 +206,7 @@ def rebuild_ui():
 
 
 ctk.set_appearance_mode("dark")
-app = ctk.CTk(); app.title("TaskFlow"); app.geometry("650x800")
+app = ctk.CTk(); app.title("TO_DO LIST"); app.geometry("650x800")
 rebuild_ui()
 app.mainloop()
 db.close()
