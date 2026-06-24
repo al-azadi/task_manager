@@ -29,8 +29,9 @@ C = THEMES[current_theme]
 
 def switch_theme(mode):
     global current_theme, C
-    current_theme = mode
-    C = THEMES[mode]
+    theme_key = "dark" if mode == "system" else mode 
+    current_theme = theme_key
+    C = THEMES[theme_key]
     ctk.set_appearance_mode(mode)
     rebuild_ui()
 
@@ -123,7 +124,7 @@ def card(task):
     content = ctk.CTkFrame(c, fg_color="transparent"); content.pack(side="left", fill="both", expand=True, padx=15, pady=12)
     row = ctk.CTkFrame(content, fg_color="transparent"); row.pack(fill="x")
     ctk.CTkLabel(row, text=f"{'✅' if done else '📌'} {t}", font=("Arial",15,"bold"),
-                 text_color=C["ok"] if done else C["text"]).pack(side="left")
+                text_color=C["ok"] if done else C["text"]).pack(side="left")
     ctk.CTkLabel(row, text=f"  {s}  ", font=("Arial",10,"bold"), text_color="white",
                  fg_color=C["ok"] if done else C["warn"], corner_radius=10).pack(side="right")
     if d: ctk.CTkLabel(content, text=d[:100]+("..." if len(d)>100 else ""), font=("Arial",12),
@@ -147,7 +148,7 @@ def rebuild_ui():
     theme_frame = ctk.CTkFrame(head, fg_color="transparent"); theme_frame.pack(side="right")
     for mode, icon in [("dark","🌙"), ("light","☀️"), ("system","💻")]:
         ctk.CTkButton(theme_frame, text=icon, width=36, height=36, corner_radius=18,
-                    fg_color=C["accent"] if current_theme==mode else C["card"],
+                    fg_color=C["accent"] if current_theme==("dark" if mode=="system" else mode) else C["card"],
                     command=lambda m=mode: switch_theme(m)).pack(side="left", padx=3)
 
     search_frame = ctk.CTkFrame(app, fg_color=C["card"], corner_radius=16)
