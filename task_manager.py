@@ -128,11 +128,12 @@ def card(task):
     ctk.CTkLabel(row, text=f"  {s}  ", font=("Arial",10,"bold"), text_color="white",
                  fg_color=C["ok"] if done else C["warn"], corner_radius=10).pack(side="right")
     if d: ctk.CTkLabel(content, text=d[:100]+("..." if len(d)>100 else ""), font=("Arial",12),
-                       text_color=C["muted"], wraplength=400).pack(anchor="w", pady=5)
+                       text_color=C["muted"], wraplength=300).pack(anchor="w", pady=5)
     ctk.CTkLabel(content, text=f"🔥 {p}", font=("Arial",11,"bold"), text_color=PRIORITY.get(p)).pack(anchor="w")
     btns = ctk.CTkFrame(c, fg_color="transparent", width=90); btns.pack(side="right", padx=10, pady=10); btns.pack_propagate(False)
     ctk.CTkButton(btns, text="✏️ edit", width=32, height=32, fg_color=C["accent"], command=lambda: edit(i,t,d,p,s)).pack(pady=2)
-    if not done: ctk.CTkButton(btns, text="✓", width=32, height=32, fg_color=C["ok"], command=lambda: done(i)).pack(pady=2)
+    if not done: ctk.CTkButton(btns, text="❌", width=32, height=32, fg_color=C["warn"], command=lambda: done(i)).pack(pady=2)
+    if done: ctk.CTkButton(btns, text="✅", width=20, height=30, fg_color=C["border"], command=lambda: done(i)).pack(pady=0)
     ctk.CTkButton(btns, text="🗑 del", width=32, height=32, fg_color=C["del"], command=lambda: delete(i)).pack(pady=2)
 
 
